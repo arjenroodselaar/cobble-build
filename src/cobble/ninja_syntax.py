@@ -9,6 +9,7 @@ import itertools
 import textwrap
 import re
 
+
 def _escape_path(word):
     """Used to escape paths; only escapes the characters that are significant
     in a build/rule definition.  Interestingly, does *not* escape dollar signs.
@@ -23,7 +24,7 @@ def _as_iterable(input):
     """
     if isinstance(input, str):
         return [input]
-    if isinstance(input, collections.Iterable):
+    if isinstance(input, collections.abc.Iterable):
         return input
     if input is None:
         return []
@@ -128,7 +129,7 @@ class Writer(object):
             self.variable('dyndep', dyndep)
             if variables is None:
               pass
-            elif isinstance(variables, collections.Mapping):
+            elif isinstance(variables, collections.abc.Mapping):
                 for key in variables:
                     self.variable(key, variables[key])
             else:
